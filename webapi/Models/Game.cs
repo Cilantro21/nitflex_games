@@ -8,9 +8,13 @@ namespace webapi.Models
         public int Id { get; set; }
 
         [Required]
-        public string? Name { get; set; }
+        public string? Title { get; set; }
 
+        [Column(TypeName = "text")]
         public string? Description { get; set; }
+
+        [Required]
+        public string? Category { get; set; }
 
         public DateTime ReleaseDate { get; set; }
 
