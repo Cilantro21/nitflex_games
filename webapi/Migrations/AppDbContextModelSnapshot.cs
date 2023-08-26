@@ -19,6 +19,21 @@ namespace webapi.Migrations
                 .HasAnnotation("ProductVersion", "7.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+            modelBuilder.Entity("GamePlatform", b =>
+                {
+                    b.Property<int>("GamesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PlatformsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("GamesId", "PlatformsId");
+
+                    b.HasIndex("PlatformsId");
+
+                    b.ToTable("GamePlatform");
+                });
+
             modelBuilder.Entity("webapi.Models.Game", b =>
                 {
                     b.Property<int>("Id")
@@ -31,9 +46,6 @@ namespace webapi.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
-
-                    b.Property<int>("PlatformId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("datetime(6)");
@@ -49,8 +61,6 @@ namespace webapi.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PlatformId");
 
                     b.HasIndex("VendorId");
 
@@ -109,28 +119,30 @@ namespace webapi.Migrations
                     b.ToTable("Vendors");
                 });
 
-            modelBuilder.Entity("webapi.Models.Game", b =>
+            modelBuilder.Entity("GamePlatform", b =>
                 {
-                    b.HasOne("webapi.Models.Platform", "Platform")
-                        .WithMany("Games")
-                        .HasForeignKey("PlatformId")
+                    b.HasOne("webapi.Models.Game", null)
+                        .WithMany()
+                        .HasForeignKey("GamesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("webapi.Models.Platform", null)
+                        .WithMany()
+                        .HasForeignKey("PlatformsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("webapi.Models.Game", b =>
+                {
                     b.HasOne("webapi.Models.Vendor", "Vendor")
                         .WithMany("Games")
                         .HasForeignKey("VendorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Platform");
-
                     b.Navigation("Vendor");
-                });
-
-            modelBuilder.Entity("webapi.Models.Platform", b =>
-                {
-                    b.Navigation("Games");
                 });
 
             modelBuilder.Entity("webapi.Models.Vendor", b =>

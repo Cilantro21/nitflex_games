@@ -15,6 +15,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 }
 );
 builder.Services.AddScoped<IGamesService, GamesService>();
+builder.Services.AddScoped<IPlatformsService, PlatformsService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

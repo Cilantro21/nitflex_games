@@ -43,7 +43,6 @@ namespace webapi.Services
                 currentGame.Description = game.Description;
                 currentGame.VendorId = game.VendorId;
                 currentGame.Score = game.Score;
-                currentGame.PlatformId = game.PlatformId;
             }
             _context.SaveChanges();
         }

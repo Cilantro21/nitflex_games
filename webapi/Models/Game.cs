@@ -21,13 +21,10 @@ namespace webapi.Models
         [Range(0, 10)]
         public double Score { get; set; }
 
-        public int PlatformId { get; set; }
-        [ForeignKey("PlatformId")]
-        public Platform? Platform { get; set; }
-
         public int VendorId { get; set; }
         [ForeignKey("VendorId")]
         public Vendor? Vendor { get; set; }
 
+        public ICollection<GamesPlatforms>? GamesPlatforms { get; set; }
     }
 }

@@ -18,6 +18,6 @@ namespace webapi.Models
 
         public DateTime EndOfSupport { get; set; }
 
-        public ICollection<Game>? Games { get; set; }
+        public ICollection<GamesPlatforms>? GamesPlatforms { get; set; }
     }
 }
